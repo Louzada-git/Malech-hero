@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hero RPG • Ficha</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="top-nav container">
+    <h1>Ficha do Personagem</h1>
+    <div class="top-actions">
+      <span>Usuário: <strong id="sessionUser">-</strong></span>
+      <a class="btn ghost" href="login.html">Login</a>
+      <a class="btn ghost" id="adminLink" href="admin.html">Admin</a>
+      <button class="btn danger" id="btnLogout">Sair</button>
+    </div>
+  </header>
+
+  <main class="container grid2">
+    <section class="panel">
+      <h2>Dados base</h2>
+      <div class="fields2">
+        <label>Nome<input id="nome" /></label>
+        <label>Origem<select id="origem"></select></label>
+        <label>Nível<input id="nivel" type="number" min="1" value="1" /></label>
+        <label>EXP atual<input id="expAtual" type="number" min="0" value="0" /></label>
+      </div>
+      <div class="chips">
+        <span>EXP próximo: <strong id="expProximo">100</strong></span>
+        <span>Dinheiro: <strong id="dinheiro">$250</strong></span>
+      </div>
+      <small id="origemObs" class="muted"></small>
+    </section>
+
+    <section class="panel">
+      <h2>Atributos</h2>
+      <div id="atributosGrid" class="fields3"></div>
+      <div class="chips">
+        <span>Custo usado: <strong id="custoUsado">0</strong></span>
+        <span>Saldo (28): <strong id="custoRestante">28</strong></span>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Recursos derivados</h2>
+      <div class="cards3">
+        <article><h3>Mana</h3><p id="manaTotal" class="big">0</p></article>
+        <article><h3>HP</h3><p id="hpTotal" class="big">0</p></article>
+        <article><h3>Perícias</h3><p id="periciasTotal" class="big">0</p></article>
+      </div>
+      <div class="cards3 mini">
+        <article><h3>Combate</h3><p id="pontosCombate" class="big">15</p></article>
+        <article><h3>Evolução</h3><p id="pontosEvolucao" class="big">15</p></article>
+        <article><h3>Mod. Poder</h3><p id="modPoder" class="big">0</p></article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Poder e categorias</h2>
+      <div class="fields2">
+        <label>Descrição<textarea id="poderDescricao" rows="3"></textarea></label>
+        <label>Defeito<textarea id="poderDefeito" rows="3"></textarea></label>
+        <label>Principal
+          <select id="categoriaPrincipal"><option>Ataque</option><option>Mente</option><option>Suporte</option><option>Defesa</option><option>Geral</option></select>
+        </label>
+        <label>Secundária 1
+          <select id="categoriaSec1"><option value="">Nenhuma</option><option>Ataque</option><option>Mente</option><option>Suporte</option><option>Defesa</option><option>Geral</option></select>
+        </label>
+        <label>Secundária 2
+          <select id="categoriaSec2"><option value="">Nenhuma</option><option>Ataque</option><option>Mente</option><option>Suporte</option><option>Defesa</option><option>Geral</option></select>
+        </label>
+      </div>
+      <p id="eficienciaTexto" class="muted">Sem secundárias.</p>
+    </section>
+
+    <section class="panel full">
+      <h2>Efeitos</h2>
+      <div id="effectsGrid" class="effects-grid"></div>
+      <div class="chips">
+        <span>PdE efeitos: <strong id="pdeGasto">0</strong></span>
+        <span>Saldo PdE: <strong id="pdeSaldo">15</strong></span>
+      </div>
+    </section>
+
+    <section class="panel full">
+      <h2>Aptidões</h2>
+      <div class="fields2">
+        <div>
+          <label>Buscar<input id="aptidaoBusca" placeholder="ataque, defesa, crítico" /></label>
+          <div id="aptidoesLista" class="checklist"></div>
+        </div>
+        <div>
+          <label>Anotações<textarea id="aptidoes" rows="14"></textarea></label>
+          <div class="chips"><span>PC gastos: <strong id="pcGasto">0</strong></span><span>Saldo PC: <strong id="pcSaldo">15</strong></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel full">
+      <h2>Salvar</h2>
+      <div class="fields2">
+        <label>ID da ficha<input id="sheetId" placeholder="ficha-player-01" /></label>
+        <label>Campanha<input id="campanha" /></label>
+      </div>
+      <div class="row">
+        <button id="btnSalvar" class="btn">Salvar</button>
+        <button id="btnCarregar" class="btn ghost">Carregar</button>
+        <button id="btnExportar" class="btn ghost">Exportar JSON</button>
+        <button id="btnReset" class="btn danger">Resetar</button>
+      </div>
+      <p id="saveFeedback" class="feedback"></p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+  <script src="ficha.js"></script>
+</body>
+</html>
