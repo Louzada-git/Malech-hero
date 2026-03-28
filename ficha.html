@@ -18,83 +18,81 @@
   </header>
 
   <main class="container grid2">
-    <section class="panel">
-      <h2>Dados base</h2>
-      <div class="fields2">
+    <section class="panel full">
+      <h2>Identificação</h2>
+      <div class="fields3">
         <label>Nome<input id="nome" /></label>
-        <label>Origem<select id="origem"></select></label>
+        <label>Idade (mín. 18)<input id="idade" type="number" min="18" value="18" /></label>
+        <label>Codenome<input id="codenome" /></label>
+        <label>Rank<input id="rank" /></label>
+        <label>Turma<input id="turma" /></label>
         <label>Nível<input id="nivel" type="number" min="1" value="1" /></label>
-        <label>EXP atual<input id="expAtual" type="number" min="0" value="0" /></label>
       </div>
       <div class="chips">
-        <span>EXP próximo: <strong id="expProximo">100</strong></span>
-        <span>Dinheiro: <strong id="dinheiro">$250</strong></span>
+        <span>XP: <strong id="xpTexto">0/100</strong></span>
+        <label class="chip-input">XP Atual <input id="xpAtual" type="number" min="0" value="0" /></label>
       </div>
-      <small id="origemObs" class="muted"></small>
     </section>
 
     <section class="panel">
       <h2>Atributos</h2>
-      <div id="atributosGrid" class="fields3"></div>
-      <div class="chips">
-        <span>Custo usado: <strong id="custoUsado">0</strong></span>
-        <span>Saldo (28): <strong id="custoRestante">28</strong></span>
-      </div>
+      <p class="muted">Sem custo inicial de atributos travado (distribuição livre).</p>
+      <div id="atributosGrid" class="fields2"></div>
     </section>
 
     <section class="panel">
-      <h2>Recursos derivados</h2>
-      <div class="cards3">
-        <article><h3>Mana</h3><p id="manaTotal" class="big">0</p></article>
-        <article><h3>HP</h3><p id="hpTotal" class="big">0</p></article>
-        <article><h3>Perícias</h3><p id="periciasTotal" class="big">0</p></article>
+      <h2>Recursos</h2>
+      <div class="fields2">
+        <label>Vida (atual)<input id="vidaAtual" type="number" min="0" value="0" /></label>
+        <label>Mana (atual)<input id="manaAtual" type="number" min="0" value="0" /></label>
+        <label>C.A.<input id="ca" type="number" value="10" /></label>
       </div>
       <div class="cards3 mini">
-        <article><h3>Combate</h3><p id="pontosCombate" class="big">15</p></article>
-        <article><h3>Evolução</h3><p id="pontosEvolucao" class="big">15</p></article>
-        <article><h3>Mod. Poder</h3><p id="modPoder" class="big">0</p></article>
+        <article><h3>Vida Máx</h3><p id="hpTotal" class="big">0</p></article>
+        <article><h3>Mana Máx</h3><p id="manaTotal" class="big">0</p></article>
+        <article><h3>Perícias</h3><p id="periciasTotal" class="big">0</p></article>
       </div>
     </section>
 
-    <section class="panel">
-      <h2>Poder e categorias</h2>
+    <section class="panel full">
+      <h2>Perícias</h2>
+      <div id="periciasLista" class="skills-grid"></div>
+      <div class="fields3 top-space">
+        <label>Ofício ¹<input id="oficio1" placeholder="" /></label>
+        <label>Ofício ²<input id="oficio2" placeholder="" /></label>
+        <label>Ofício ³<input id="oficio3" placeholder="" /></label>
+      </div>
+    </section>
+
+    <section class="panel full">
+      <h2>Aptidão</h2>
+      <label><textarea id="aptidoes" rows="6" placeholder="- &#10;- &#10;- &#10;- &#10;- "></textarea></label>
+    </section>
+
+    <section class="panel full">
+      <h2>Talentos</h2>
+      <label><textarea id="talentos" rows="5" placeholder="- &#10;- &#10;- &#10;-"></textarea></label>
+    </section>
+
+    <section class="panel full">
+      <h2>Habilidades</h2>
+      <label><textarea id="habilidades" rows="5" placeholder="- &#10;- &#10;- &#10;-"></textarea></label>
+    </section>
+
+    <section class="panel full">
+      <h2>Inventário (copia e cola)</h2>
+      <p class="muted">Peso total: <strong id="pesoAtual">0</strong>/<strong id="pesoMax">15</strong> = (mod força + 5) × 3</p>
+      <label>Inventário<textarea id="inventarioTexto" rows="8" placeholder="Item:&#10;Descrição:&#10;Peso:"></textarea></label>
+      <label>Cicatrizes<textarea id="cicatrizes" rows="4"></textarea></label>
+    </section>
+
+    <section class="panel full">
+      <h2>Poder</h2>
       <div class="fields2">
+        <label>Nome<input id="poderNome" /></label>
         <label>Descrição<textarea id="poderDescricao" rows="3"></textarea></label>
-        <label>Defeito<textarea id="poderDefeito" rows="3"></textarea></label>
-        <label>Principal
-          <select id="categoriaPrincipal"><option>Ataque</option><option>Mente</option><option>Suporte</option><option>Defesa</option><option>Geral</option></select>
-        </label>
-        <label>Secundária 1
-          <select id="categoriaSec1"><option value="">Nenhuma</option><option>Ataque</option><option>Mente</option><option>Suporte</option><option>Defesa</option><option>Geral</option></select>
-        </label>
-        <label>Secundária 2
-          <select id="categoriaSec2"><option value="">Nenhuma</option><option>Ataque</option><option>Mente</option><option>Suporte</option><option>Defesa</option><option>Geral</option></select>
-        </label>
       </div>
-      <p id="eficienciaTexto" class="muted">Sem secundárias.</p>
-    </section>
-
-    <section class="panel full">
-      <h2>Efeitos</h2>
-      <div id="effectsGrid" class="effects-grid"></div>
-      <div class="chips">
-        <span>PdE efeitos: <strong id="pdeGasto">0</strong></span>
-        <span>Saldo PdE: <strong id="pdeSaldo">15</strong></span>
-      </div>
-    </section>
-
-    <section class="panel full">
-      <h2>Aptidões</h2>
-      <div class="fields2">
-        <div>
-          <label>Buscar<input id="aptidaoBusca" placeholder="ataque, defesa, crítico" /></label>
-          <div id="aptidoesLista" class="checklist"></div>
-        </div>
-        <div>
-          <label>Anotações<textarea id="aptidoes" rows="14"></textarea></label>
-          <div class="chips"><span>PC gastos: <strong id="pcGasto">0</strong></span><span>Saldo PC: <strong id="pcSaldo">15</strong></span></div>
-        </div>
-      </div>
+      <label>Efeitos<textarea id="poderEfeitos" rows="4"></textarea></label>
     </section>
 
     <section class="panel full">
