@@ -55,23 +55,41 @@
     </section>
 
     <section class="panel full">
-      <h2>Perícias</h2>
+      <h2>Perícias customizáveis</h2>
       <div id="periciasLista" class="skills-grid"></div>
       <div class="fields3 top-space">
-        <label>Ofício ¹<input id="oficio1" placeholder="" /></label>
-        <label>Ofício ²<input id="oficio2" placeholder="" /></label>
-        <label>Ofício ³<input id="oficio3" placeholder="" /></label>
+        <label>Ofício ¹<input id="oficio1" /></label>
+        <label>Ofício ²<input id="oficio2" /></label>
+        <label>Ofício ³<input id="oficio3" /></label>
       </div>
+      <div class="inline-builder top-space">
+        <label>Nova perícia<input id="novaPericiaNome" placeholder="Ex: Arcanismo Urbano" /></label>
+        <label>Atributo base
+          <select id="novaPericiaAttr">
+            <option value="forca">Força</option>
+            <option value="destreza">Destreza</option>
+            <option value="vigor">Vigor</option>
+            <option value="intelecto">Intelecto</option>
+            <option value="poder">Poder</option>
+          </select>
+        </label>
+        <button id="btnAddPericia" class="btn ghost">Adicionar perícia</button>
+      </div>
+      <div id="periciasCustom" class="catalog"></div>
     </section>
 
     <section class="panel full">
-      <h2>Aptidão</h2>
-      <label><textarea id="aptidoes" rows="6" placeholder="- &#10;- &#10;- &#10;- &#10;- "></textarea></label>
+      <h2>Aptidões (com descrição)</h2>
+      <label>Buscar aptidão<input id="buscaAptidao" placeholder="Ex: crítico, defesa, ataque" /></label>
+      <div id="aptidoesCatalogo" class="catalog"></div>
+      <label class="top-space">Anotações de Aptidão<textarea id="aptidoesNotas" rows="4" placeholder="- "></textarea></label>
     </section>
 
     <section class="panel full">
-      <h2>Talentos</h2>
-      <label><textarea id="talentos" rows="5" placeholder="- &#10;- &#10;- &#10;-"></textarea></label>
+      <h2>Talentos (com descrição)</h2>
+      <label>Buscar talento<input id="buscaTalento" placeholder="Ex: mana, esquiva, fantasma" /></label>
+      <div id="talentosCatalogo" class="catalog"></div>
+      <label class="top-space">Anotações de Talento<textarea id="talentosNotas" rows="4" placeholder="- "></textarea></label>
     </section>
 
     <section class="panel full">
@@ -87,12 +105,27 @@
     </section>
 
     <section class="panel full">
-      <h2>Poder</h2>
-      <div class="fields2">
-        <label>Nome<input id="poderNome" /></label>
-        <label>Descrição<textarea id="poderDescricao" rows="3"></textarea></label>
+      <h2>Criação de Poder (melhorada)</h2>
+      <div class="fields3">
+        <label>Nome do poder<input id="poderNome" /></label>
+        <label>Categoria principal
+          <select id="poderCategoriaPrincipal">
+            <option>Ataque</option><option>Mente</option><option>Suporte</option><option>Defesa</option><option>Geral</option>
+          </select>
+        </label>
+        <label>Categoria secundária
+          <select id="poderCategoriaSecundaria">
+            <option value="">Nenhuma</option><option>Ataque</option><option>Mente</option><option>Suporte</option><option>Defesa</option><option>Geral</option>
+          </select>
+        </label>
       </div>
-      <label>Efeitos<textarea id="poderEfeitos" rows="4"></textarea></label>
+      <div class="fields2 top-space">
+        <label>Descrição<textarea id="poderDescricao" rows="3"></textarea></label>
+        <label>Defeito do poder<textarea id="poderDefeito" rows="3"></textarea></label>
+      </div>
+      <label class="top-space">Buscar efeito<input id="buscaEfeito" placeholder="Ex: dano, cura, teleporte" /></label>
+      <div id="efeitosCatalogo" class="catalog"></div>
+      <label class="top-space">Combinação / execução do poder<textarea id="poderExecucao" rows="4" placeholder="Como o poder funciona em cena, limites, custo e gatilho."></textarea></label>
     </section>
 
     <section class="panel full">
