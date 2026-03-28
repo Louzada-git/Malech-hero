@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hero RPG • Ficha</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="top-nav container">
+    <h1>Ficha do Personagem</h1>
+    <div class="top-actions">
+      <span>Usuário: <strong id="sessionUser">-</strong></span>
+      <a class="btn ghost" href="login.html">Login</a>
+      <a class="btn ghost" id="adminLink" href="admin.html">Admin</a>
+      <button class="btn danger" id="btnLogout">Sair</button>
+    </div>
+  </header>
+
+  <main class="container grid2">
+    <section class="panel full">
+      <h2>Identificação</h2>
+      <div class="fields3">
+        <label>Nome<input id="nome" /></label>
+        <label>Idade (mín. 18)<input id="idade" type="number" min="18" value="18" /></label>
+        <label>Codenome<input id="codenome" /></label>
+        <label>Rank<input id="rank" /></label>
+        <label>Turma<input id="turma" /></label>
+        <label>Nível<input id="nivel" type="number" min="1" value="1" /></label>
+      </div>
+      <div class="chips">
+        <span>XP: <strong id="xpTexto">0/100</strong></span>
+        <label class="chip-input">XP Atual <input id="xpAtual" type="number" min="0" value="0" /></label>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Atributos</h2>
+      <p class="muted">Sem custo inicial de atributos travado (distribuição livre).</p>
+      <div id="atributosGrid" class="fields2"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Recursos</h2>
+      <div class="fields2">
+        <label>Vida (atual)<input id="vidaAtual" type="number" min="0" value="0" /></label>
+        <label>Mana (atual)<input id="manaAtual" type="number" min="0" value="0" /></label>
+        <label>C.A.<input id="ca" type="number" value="10" /></label>
+      </div>
+      <div class="cards3 mini">
+        <article><h3>Vida Máx</h3><p id="hpTotal" class="big">0</p></article>
+        <article><h3>Mana Máx</h3><p id="manaTotal" class="big">0</p></article>
+        <article><h3>Perícias</h3><p id="periciasTotal" class="big">0</p></article>
+      </div>
+    </section>
+
+    <section class="panel full">
+      <h2>Perícias (customizáveis)</h2>
+      <div class="row">
+        <input id="novaPericia" placeholder="Nova perícia (ex: Diplomacia Sombria)" />
+        <button id="btnAddPericia" class="btn ghost" type="button">Adicionar perícia</button>
+      </div>
+      <div id="periciasLista" class="skills-grid top-space"></div>
+      <div class="fields3 top-space">
+        <label>Ofício ¹<input id="oficio1" placeholder="" /></label>
+        <label>Ofício ²<input id="oficio2" placeholder="" /></label>
+        <label>Ofício ³<input id="oficio3" placeholder="" /></label>
+      </div>
+    </section>
+
+    <section class="panel full">
+      <h2>Aptidão</h2>
+      <p class="muted">Clique para adicionar/remove e veja a descrição.</p>
+      <div id="aptidoesCatalogo" class="catalog-grid"></div>
+      <label class="top-space">Selecionadas<textarea id="aptidoes" rows="6" placeholder="- "></textarea></label>
+    </section>
+
+    <section class="panel full">
+      <h2>Talentos</h2>
+      <p class="muted">Clique para adicionar/remove e veja a descrição.</p>
+      <div id="talentosCatalogo" class="catalog-grid"></div>
+      <label class="top-space">Selecionados<textarea id="talentos" rows="5" placeholder="- "></textarea></label>
+    </section>
+
+    <section class="panel full">
+      <h2>Habilidades</h2>
+      <label><textarea id="habilidades" rows="5" placeholder="- &#10;- &#10;- &#10;-"></textarea></label>
+    </section>
+
+    <section class="panel full">
+      <h2>Inventário (copia e cola)</h2>
+      <p class="muted">Peso total: <strong id="pesoAtual">0</strong>/<strong id="pesoMax">15</strong> = (mod força + 5) × 3</p>
+      <label>Inventário<textarea id="inventarioTexto" rows="8" placeholder="Item:&#10;Descrição:&#10;Peso:"></textarea></label>
+      <label>Cicatrizes<textarea id="cicatrizes" rows="4"></textarea></label>
+    </section>
+
+    <section class="panel full">
+      <h2>Poder (criação guiada)</h2>
+      <div class="fields2">
+        <label>Nome<input id="poderNome" /></label>
+        <label>Descrição<textarea id="poderDescricao" rows="3"></textarea></label>
+        <label>Defeito<textarea id="poderDefeito" rows="3"></textarea></label>
+        <label>Categoria principal
+          <select id="poderCategoriaPrincipal">
+            <option>Ataque</option><option>Mente</option><option>Suporte</option><option>Defesa</option><option>Geral</option>
+          </select>
+        </label>
+        <label>Categoria secundária 1
+          <select id="poderCategoriaSec1">
+            <option value="">Nenhuma</option><option>Ataque</option><option>Mente</option><option>Suporte</option><option>Defesa</option><option>Geral</option>
+          </select>
+        </label>
+        <label>Categoria secundária 2
+          <select id="poderCategoriaSec2">
+            <option value="">Nenhuma</option><option>Ataque</option><option>Mente</option><option>Suporte</option><option>Defesa</option><option>Geral</option>
+          </select>
+        </label>
+      </div>
+      <p class="muted" id="eficienciaCategorias">Sem secundárias.</p>
+      <h3>Efeitos disponíveis (com descrição)</h3>
+      <div id="efeitosCatalogo" class="catalog-grid"></div>
+      <label class="top-space">Efeitos selecionados<textarea id="poderEfeitos" rows="5"></textarea></label>
+    </section>
+
+    <section class="panel full">
+      <h2>Salvar</h2>
+      <div class="fields2">
+        <label>ID da ficha<input id="sheetId" placeholder="ficha-player-01" /></label>
+        <label>Campanha<input id="campanha" /></label>
+      </div>
+      <div class="row">
+        <button id="btnSalvar" class="btn">Salvar</button>
+        <button id="btnCarregar" class="btn ghost">Carregar</button>
+        <button id="btnExportar" class="btn ghost">Exportar JSON</button>
+        <button id="btnReset" class="btn danger">Resetar</button>
+      </div>
+      <p id="saveFeedback" class="feedback"></p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+  <script src="ficha.js"></script>
+</body>
+</html>

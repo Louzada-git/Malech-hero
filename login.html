@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hero RPG • Login</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="auth-body">
+  <main class="auth-shell">
+    <section class="auth-card">
+      <h1>Hero RPG</h1>
+      <p class="muted">Entre para acessar sua ficha. Administradores podem gerenciar fichas de todos os players.</p>
+
+      <div class="tabs">
+        <button class="tab-btn active" data-target="loginPane">Entrar</button>
+        <button class="tab-btn" data-target="registerPane">Registrar</button>
+      </div>
+
+      <section id="loginPane" class="tab-pane active">
+        <label>E-mail
+          <input id="loginEmail" type="email" placeholder="voce@email.com" />
+        </label>
+        <label>Senha
+          <input id="loginSenha" type="password" placeholder="********" />
+        </label>
+        <button id="btnLogin">Entrar</button>
+      </section>
+
+      <section id="registerPane" class="tab-pane">
+        <label>E-mail
+          <input id="registerEmail" type="email" placeholder="voce@email.com" />
+        </label>
+        <label>Senha
+          <input id="registerSenha" type="password" placeholder="mínimo 4 caracteres" />
+        </label>
+        <label>Tipo de conta
+          <select id="registerRole">
+            <option value="player">Player</option>
+            <option value="admin">Admin</option>
+          </select>
+        </label>
+        <button id="btnRegister">Criar conta</button>
+      </section>
+
+      <p id="authFeedback" class="feedback"></p>
+      <div class="row-end">
+        <a class="link" href="ficha.html">Ir para ficha</a>
+        <a class="link" href="admin.html">Painel admin</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+  <script src="login.js"></script>
+</body>
+</html>
