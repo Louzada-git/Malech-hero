@@ -3,179 +3,138 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hero RPG • Ficha Avançada</title>
+  <title>Hero RPG • Ficha 2.0</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="cris-body">
-  <header class="top-nav container cris-topbar">
-    <h1>Ficha Hero RPG • Edição Avançada</h1>
-    <nav class="cris-menu">
-      <a href="#">Agentes</a>
-      <a href="#">Campanhas</a>
-      <a href="#">Ameaças</a>
-      <a href="#">Inventário</a>
-    </nav>
-    <div class="top-actions">
-      <span>Usuário: <strong id="sessionUser">-</strong></span>
-      <a class="btn ghost" href="login.html">Login</a>
-      <a class="btn ghost" id="adminLink" href="admin.html">Admin</a>
-      <button class="btn danger" id="btnLogout">Sair</button>
+<body class="rz-body">
+  <header class="rz-top">
+    <div class="container rz-top-inner">
+      <h1>Hero RPG • Ficha 2.0</h1>
+      <div class="top-actions">
+        <span>Usuário: <strong id="sessionUser">-</strong></span>
+        <a class="btn ghost" href="login.html">Login</a>
+        <a class="btn ghost" id="adminLink" href="admin.html">Admin</a>
+        <button class="btn danger" id="btnLogout">Sair</button>
+      </div>
     </div>
   </header>
 
-  <main class="container grid2 cris-layout">
-    <section class="panel full cris-panel">
-      <h2>Identificação do Personagem</h2>
-      <div class="fields3">
-        <label>Nome<input id="nome" /></label>
-        <label>Idade (mín. 18)<input id="idade" type="number" min="18" value="18" /></label>
-        <label>Codenome<input id="codenome" /></label>
-        <label>Rank<input id="rank" /></label>
-        <label>Turma<input id="turma" /></label>
-        <label>Origem
-          <select id="origem"></select>
-        </label>
-      </div>
-      <div class="chips">
-        <span>Nível: <strong id="nivelTexto">1</strong></span>
-        <span>XP: <strong id="xpTexto">0/100</strong></span>
-        <label class="chip-input">Nível <input id="nivel" type="number" min="1" value="1" /></label>
-        <label class="chip-input">XP Atual <input id="xpAtual" type="number" min="0" value="0" /></label>
-      </div>
+  <main class="container rz-shell">
+    <aside class="rz-side">
+      <h2>Painel</h2>
+      <div class="rz-card"><span>Nível</span><strong id="sNivel">1</strong></div>
+      <div class="rz-card"><span>XP</span><strong id="sXp">0/100</strong></div>
+      <div class="rz-card hp"><span>Vida</span><strong id="sHp">0/0</strong></div>
+      <div class="rz-card mana"><span>Mana</span><strong id="sMana">0/0</strong></div>
+      <div class="rz-card"><span>C.A.</span><strong id="sCa">10</strong></div>
+      <div class="rz-card"><span>PC/PdE</span><strong id="sPcPde">15 / 15</strong></div>
+      <div class="rz-card"><span>Peso</span><strong id="sPeso">0 / 15</strong></div>
       <p id="origemObs" class="muted"></p>
-    </section>
+    </aside>
 
-    <section class="panel full cris-panel">
-      <div class="cris-split">
-        <div>
-          <h2>Painel Tático</h2>
-          <div class="cris-bars">
-            <div class="bar hp"><span>VIDA</span><strong id="hpBarText">0/0</strong></div>
-            <div class="bar mana"><span>MANA</span><strong id="manaBarText">0/0</strong></div>
-            <div class="bar esforco"><span>ESFORÇO</span><strong id="esforcoText">0</strong></div>
-          </div>
+    <section class="rz-main">
+      <div class="rz-tabs">
+        <button class="rz-tab active" data-tab="geral">Geral</button>
+        <button class="rz-tab" data-tab="poder">Poder</button>
+        <button class="rz-tab" data-tab="combate">Combate</button>
+        <button class="rz-tab" data-tab="inventario">Inventário</button>
+      </div>
+
+      <section class="rz-pane active" id="tab_geral">
+        <h2>Dados do Personagem</h2>
+        <div class="fields3">
+          <label>Nome<input id="nome" /></label>
+          <label>Idade (mín.18)<input id="idade" type="number" min="18" value="18" /></label>
+          <label>Codenome<input id="codenome" /></label>
+          <label>Rank<input id="rank" /></label>
+          <label>Turma<input id="turma" /></label>
+          <label>Origem<select id="origem"></select></label>
+          <label>Nível<input id="nivel" type="number" min="1" value="1" /></label>
+          <label>XP Atual<input id="xpAtual" type="number" min="0" value="0" /></label>
+          <label>C.A.<input id="ca" type="number" value="10" /></label>
         </div>
-        <div>
-          <h2>Roda de Atributos</h2>
-          <div class="attr-wheel">
-            <div class="wheel-center">ATRIBUTOS</div>
-            <div class="orb orb-top"><small>FOR</small><strong id="orb_forca">10</strong></div>
-            <div class="orb orb-right"><small>DES</small><strong id="orb_destreza">10</strong></div>
-            <div class="orb orb-bottom"><small>VIG</small><strong id="orb_vigor">10</strong></div>
-            <div class="orb orb-left"><small>INT</small><strong id="orb_intelecto">10</strong></div>
-            <div class="orb orb-mid"><small>POD</small><strong id="orb_poder">10</strong></div>
-          </div>
+
+        <h3>Atributos</h3>
+        <p class="muted">Custo total de atributos: 28.</p>
+        <div id="attrsGrid" class="fields2"></div>
+        <div class="chips">
+          <span>Custo usado: <strong id="custoUsado">0</strong></span>
+          <span>Saldo: <strong id="custoSaldo">28</strong></span>
+          <span>Pontos de atributo por nível: <strong id="ptsAttrNivel">0</strong></span>
         </div>
-      </div>
-    </section>
 
-    <section class="panel cris-panel">
-      <h2>Atributos</h2>
-      <p class="muted">Orçamento base de custo: 28 pontos de atributo.</p>
-      <div id="atributosGrid" class="fields2"></div>
-      <div class="chips top-space">
-        <span>Custo usado: <strong id="custoUsado">0</strong></span>
-        <span>Saldo custo: <strong id="custoSaldo">28</strong></span>
-        <span>Pontos de atributo por nível (acumulado): <strong id="pontosAtributoNivel">0</strong></span>
-      </div>
-    </section>
+        <div class="rz-mini-table" id="custoTabela"></div>
 
-    <section class="panel cris-panel">
-      <h2>Tabela de custo de atributo</h2>
-      <div id="tabelaCusto" class="rules-grid"></div>
-    </section>
+        <h3>Recursos</h3>
+        <div class="cards4">
+          <article><h4>Vida Máx</h4><p id="hpMax" class="big">0</p></article>
+          <article><h4>Mana Máx</h4><p id="manaMax" class="big">0</p></article>
+          <article><h4>Perícias Base</h4><p id="periciasBase" class="big">0</p></article>
+          <article><h4>Marcos</h4><p id="marcos" class="big">-</p></article>
+        </div>
 
-    <section class="panel full cris-panel">
-      <h2>Recursos e Fórmulas</h2>
-      <div class="cards4">
-        <article><h3>Vida Máx</h3><p id="hpTotal" class="big">0</p><small>Nível×5 + (Vigor×Nível)</small></article>
-        <article><h3>Mana Máx</h3><p id="manaTotal" class="big">0</p><small>Nível×5 + (Poder×Nível)</small></article>
-        <article><h3>Perícias Base</h3><p id="periciasTotal" class="big">0</p><small>2 + (Intelecto÷2)</small></article>
-        <article><h3>C.A.</h3><p id="caTexto" class="big">10</p><small>Defina manualmente</small></article>
-      </div>
-      <div class="fields3 top-space">
-        <label>Vida Atual<input id="vidaAtual" type="number" min="0" value="0" /></label>
-        <label>Mana Atual<input id="manaAtual" type="number" min="0" value="0" /></label>
-        <label>C.A.<input id="ca" type="number" value="10" /></label>
-      </div>
-    </section>
+        <div class="fields2 top-space">
+          <label>Vida Atual<input id="vidaAtual" type="number" min="0" value="0" /></label>
+          <label>Mana Atual<input id="manaAtual" type="number" min="0" value="0" /></label>
+        </div>
 
-    <section class="panel full cris-panel">
-      <h2>Pontos de Combate / Evolução</h2>
-      <div class="cards3">
-        <article><h3>Combate total</h3><p id="pcTotal" class="big">15</p></article>
-        <article><h3>Evolução total</h3><p id="pdeTotal" class="big">15</p></article>
-        <article><h3>Marcos aplicados</h3><p id="marcosTexto" class="big">Nível 1</p></article>
-      </div>
-      <small class="muted">Ganho +5 em níveis 2,5,7,10,12,15... e a cada 10 níveis o ganho por marco aumenta em +1.</small>
-    </section>
+        <h3>Perícias Customizáveis</h3>
+        <div class="fields3">
+          <label>Nome<input id="newPericiaNome" /></label>
+          <label>Descrição<input id="newPericiaDesc" /></label>
+          <button id="btnAddPericia" class="btn" type="button">Adicionar</button>
+        </div>
+        <div id="periciasList" class="skills-grid top-space"></div>
+      </section>
 
-    <section class="panel full cris-panel">
-      <h2>Perícias (customizáveis)</h2>
-      <div class="fields3">
-        <label>Nova perícia<input id="novaPericiaNome" placeholder="Ex: Diplomacia" /></label>
-        <label>Descrição curta<input id="novaPericiaDesc" placeholder="Ex: Convencer NPCs" /></label>
-        <button id="btnAddPericia" class="btn" type="button">Adicionar perícia</button>
-      </div>
-      <div id="periciasLista" class="skills-grid top-space"></div>
-      <div class="fields3 top-space">
-        <label>Ofício ¹<input id="oficio1" /></label>
-        <label>Ofício ²<input id="oficio2" /></label>
-        <label>Ofício ³<input id="oficio3" /></label>
-      </div>
-    </section>
+      <section class="rz-pane" id="tab_poder">
+        <h2>Criador de Poder</h2>
+        <div class="fields2">
+          <label>Nome do poder<input id="poderNome" /></label>
+          <label>Descrição<textarea id="poderDescricao" rows="3"></textarea></label>
+          <label>Defeito<textarea id="poderDefeito" rows="3"></textarea></label>
+          <label>Categoria principal<select id="catMain"></select></label>
+          <label>Secundária 1<select id="catSec1"></select></label>
+          <label>Secundária 2<select id="catSec2"></select></label>
+        </div>
+        <p id="poderEf" class="muted"></p>
+        <div class="chips"><span>PdE gasto em efeitos: <strong id="pdeEfeitos">0</strong></span></div>
+        <div id="efeitosList" class="catalog-grid"></div>
+        <label class="top-space">Resumo e lore<textarea id="poderResumo" rows="5"></textarea></label>
+      </section>
 
-    <section class="panel full cris-panel">
-      <h2>Criador de Poder</h2>
-      <div class="fields2">
-        <label>Nome do poder<input id="poderNome" /></label>
-        <label>Descrição<textarea id="poderDescricao" rows="3"></textarea></label>
-        <label>Defeito<textarea id="poderDefeito" rows="3"></textarea></label>
-        <label>Categoria principal<select id="categoriaPrincipal"></select></label>
-        <label>Categoria secundária 1<select id="categoriaSec1"></select></label>
-        <label>Categoria secundária 2<select id="categoriaSec2"></select></label>
-      </div>
-      <p id="poderEficiencia" class="muted">Eficiência secundária: sem redução.</p>
-      <div class="chips">
-        <span>PdE em efeitos: <strong id="pdeEfeitos">0</strong></span>
-      </div>
-      <div id="efeitosCatalogo" class="catalog-grid top-space"></div>
-      <label class="top-space">Resumo / interpretação do poder<textarea id="poderResumo" rows="5"></textarea></label>
-    </section>
+      <section class="rz-pane" id="tab_combate">
+        <h2>Aptidões e Talentos</h2>
+        <div class="chips"><span>PC total: <strong id="pcTotal">15</strong></span><span>PC gasto: <strong id="pcGasto">0</strong></span><span>PC saldo: <strong id="pcSaldo">15</strong></span></div>
+        <h3>Aptidões</h3>
+        <div id="aptidoesList" class="catalog-grid"></div>
+        <label class="top-space">Notas de aptidão<textarea id="aptNotes" rows="4"></textarea></label>
 
-    <section class="panel full cris-panel">
-      <h2>Aptidões (descrições + custo)</h2>
-      <div class="chips"><span>PC gastos: <strong id="pcGasto">0</strong></span><span>Saldo PC: <strong id="pcSaldo">15</strong></span></div>
-      <div id="aptidoesCatalogo" class="catalog-grid top-space"></div>
-      <label class="top-space">Anotações de aptidão<textarea id="aptidoesNotas" rows="5"></textarea></label>
-    </section>
+        <h3>Talentos</h3>
+        <div id="talentosList" class="catalog-grid"></div>
+        <label class="top-space">Notas de talentos<textarea id="talNotes" rows="4"></textarea></label>
+      </section>
 
-    <section class="panel full cris-panel">
-      <h2>Talentos (descrições + custo)</h2>
-      <div id="talentosCatalogo" class="catalog-grid"></div>
-      <label class="top-space">Anotações de talentos<textarea id="talentosNotas" rows="5"></textarea></label>
-    </section>
+      <section class="rz-pane" id="tab_inventario">
+        <h2>Inventário</h2>
+        <p class="muted">Peso total = soma dos "Peso:" / (mod força + 5) × 3</p>
+        <label>Inventário<textarea id="inventario" rows="10" placeholder="Item:\nDescrição:\nPeso:"></textarea></label>
+        <label>Cicatrizes<textarea id="cicatrizes" rows="4"></textarea></label>
+      </section>
 
-    <section class="panel full cris-panel">
-      <h2>Inventário e Cicatrizes</h2>
-      <p class="muted">Peso total: <strong id="pesoAtual">0</strong>/<strong id="pesoMax">15</strong> = (mod Força + 5) × 3</p>
-      <label>Inventário<textarea id="inventarioTexto" rows="8" placeholder="Item:\nDescrição:\nPeso:"></textarea></label>
-      <label>Cicatrizes<textarea id="cicatrizes" rows="4"></textarea></label>
-    </section>
-
-    <section class="panel full cris-panel">
-      <h2>Salvar</h2>
-      <div class="fields2">
-        <label>ID da ficha<input id="sheetId" placeholder="ficha-player-01" /></label>
-        <label>Campanha<input id="campanha" /></label>
-      </div>
-      <div class="row">
-        <button id="btnSalvar" class="btn">Salvar</button>
-        <button id="btnCarregar" class="btn ghost">Carregar</button>
-        <button id="btnExportar" class="btn ghost">Exportar JSON</button>
-        <button id="btnReset" class="btn danger">Resetar</button>
-      </div>
-      <p id="saveFeedback" class="feedback"></p>
+      <section class="rz-actions">
+        <div class="fields2">
+          <label>ID da ficha<input id="sheetId" placeholder="ficha-player-01" /></label>
+          <label>Campanha<input id="campanha" /></label>
+        </div>
+        <div class="row">
+          <button id="btnSalvar" class="btn">Salvar</button>
+          <button id="btnCarregar" class="btn ghost">Carregar</button>
+          <button id="btnExportar" class="btn ghost">Exportar JSON</button>
+          <button id="btnReset" class="btn danger">Resetar</button>
+        </div>
+        <p id="saveFeedback" class="feedback"></p>
+      </section>
     </section>
   </main>
 
