@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hero RPG • Admin</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="top-nav container">
+    <h1>Painel Admin</h1>
+    <div class="top-actions">
+      <span>Admin: <strong id="adminName">-</strong></span>
+      <a class="btn ghost" href="ficha.html">Ir para ficha</a>
+      <button id="btnLogout" class="btn danger">Sair</button>
+    </div>
+  </header>
+
+  <main class="container grid2">
+    <section class="panel">
+      <h2>Players</h2>
+      <div id="playersList" class="checklist"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Fichas do player</h2>
+      <p class="muted">Selecione um player para listar as fichas.</p>
+      <div id="sheetsList" class="checklist"></div>
+    </section>
+
+    <section class="panel full">
+      <h2>Editor de ficha</h2>
+      <label>JSON da ficha
+        <textarea id="sheetJson" rows="16" placeholder="Selecione uma ficha para editar"></textarea>
+      </label>
+      <div class="row">
+        <button id="btnSalvarSheet" class="btn">Salvar alterações</button>
+        <button id="btnExcluirSheet" class="btn danger">Excluir ficha</button>
+      </div>
+      <p id="adminFeedback" class="feedback"></p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
