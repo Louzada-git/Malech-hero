@@ -6,9 +6,15 @@
   <title>Hero RPG • Ficha Avançada</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
-  <header class="top-nav container">
+<body class="cris-body">
+  <header class="top-nav container cris-topbar">
     <h1>Ficha Hero RPG • Edição Avançada</h1>
+    <nav class="cris-menu">
+      <a href="#">Agentes</a>
+      <a href="#">Campanhas</a>
+      <a href="#">Ameaças</a>
+      <a href="#">Inventário</a>
+    </nav>
     <div class="top-actions">
       <span>Usuário: <strong id="sessionUser">-</strong></span>
       <a class="btn ghost" href="login.html">Login</a>
@@ -17,8 +23,8 @@
     </div>
   </header>
 
-  <main class="container grid2">
-    <section class="panel full">
+  <main class="container grid2 cris-layout">
+    <section class="panel full cris-panel">
       <h2>Identificação do Personagem</h2>
       <div class="fields3">
         <label>Nome<input id="nome" /></label>
@@ -39,7 +45,31 @@
       <p id="origemObs" class="muted"></p>
     </section>
 
-    <section class="panel">
+    <section class="panel full cris-panel">
+      <div class="cris-split">
+        <div>
+          <h2>Painel Tático</h2>
+          <div class="cris-bars">
+            <div class="bar hp"><span>VIDA</span><strong id="hpBarText">0/0</strong></div>
+            <div class="bar mana"><span>MANA</span><strong id="manaBarText">0/0</strong></div>
+            <div class="bar esforco"><span>ESFORÇO</span><strong id="esforcoText">0</strong></div>
+          </div>
+        </div>
+        <div>
+          <h2>Roda de Atributos</h2>
+          <div class="attr-wheel">
+            <div class="wheel-center">ATRIBUTOS</div>
+            <div class="orb orb-top"><small>FOR</small><strong id="orb_forca">10</strong></div>
+            <div class="orb orb-right"><small>DES</small><strong id="orb_destreza">10</strong></div>
+            <div class="orb orb-bottom"><small>VIG</small><strong id="orb_vigor">10</strong></div>
+            <div class="orb orb-left"><small>INT</small><strong id="orb_intelecto">10</strong></div>
+            <div class="orb orb-mid"><small>POD</small><strong id="orb_poder">10</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel cris-panel">
       <h2>Atributos</h2>
       <p class="muted">Orçamento base de custo: 28 pontos de atributo.</p>
       <div id="atributosGrid" class="fields2"></div>
@@ -50,12 +80,12 @@
       </div>
     </section>
 
-    <section class="panel">
+    <section class="panel cris-panel">
       <h2>Tabela de custo de atributo</h2>
       <div id="tabelaCusto" class="rules-grid"></div>
     </section>
 
-    <section class="panel full">
+    <section class="panel full cris-panel">
       <h2>Recursos e Fórmulas</h2>
       <div class="cards4">
         <article><h3>Vida Máx</h3><p id="hpTotal" class="big">0</p><small>Nível×5 + (Vigor×Nível)</small></article>
@@ -70,7 +100,7 @@
       </div>
     </section>
 
-    <section class="panel full">
+    <section class="panel full cris-panel">
       <h2>Pontos de Combate / Evolução</h2>
       <div class="cards3">
         <article><h3>Combate total</h3><p id="pcTotal" class="big">15</p></article>
@@ -80,7 +110,7 @@
       <small class="muted">Ganho +5 em níveis 2,5,7,10,12,15... e a cada 10 níveis o ganho por marco aumenta em +1.</small>
     </section>
 
-    <section class="panel full">
+    <section class="panel full cris-panel">
       <h2>Perícias (customizáveis)</h2>
       <div class="fields3">
         <label>Nova perícia<input id="novaPericiaNome" placeholder="Ex: Diplomacia" /></label>
@@ -95,7 +125,7 @@
       </div>
     </section>
 
-    <section class="panel full">
+    <section class="panel full cris-panel">
       <h2>Criador de Poder</h2>
       <div class="fields2">
         <label>Nome do poder<input id="poderNome" /></label>
@@ -113,27 +143,27 @@
       <label class="top-space">Resumo / interpretação do poder<textarea id="poderResumo" rows="5"></textarea></label>
     </section>
 
-    <section class="panel full">
+    <section class="panel full cris-panel">
       <h2>Aptidões (descrições + custo)</h2>
       <div class="chips"><span>PC gastos: <strong id="pcGasto">0</strong></span><span>Saldo PC: <strong id="pcSaldo">15</strong></span></div>
       <div id="aptidoesCatalogo" class="catalog-grid top-space"></div>
       <label class="top-space">Anotações de aptidão<textarea id="aptidoesNotas" rows="5"></textarea></label>
     </section>
 
-    <section class="panel full">
+    <section class="panel full cris-panel">
       <h2>Talentos (descrições + custo)</h2>
       <div id="talentosCatalogo" class="catalog-grid"></div>
       <label class="top-space">Anotações de talentos<textarea id="talentosNotas" rows="5"></textarea></label>
     </section>
 
-    <section class="panel full">
+    <section class="panel full cris-panel">
       <h2>Inventário e Cicatrizes</h2>
       <p class="muted">Peso total: <strong id="pesoAtual">0</strong>/<strong id="pesoMax">15</strong> = (mod Força + 5) × 3</p>
       <label>Inventário<textarea id="inventarioTexto" rows="8" placeholder="Item:\nDescrição:\nPeso:"></textarea></label>
       <label>Cicatrizes<textarea id="cicatrizes" rows="4"></textarea></label>
     </section>
 
-    <section class="panel full">
+    <section class="panel full cris-panel">
       <h2>Salvar</h2>
       <div class="fields2">
         <label>ID da ficha<input id="sheetId" placeholder="ficha-player-01" /></label>

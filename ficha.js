@@ -197,6 +197,15 @@ function recalc() {
   $('manaTotal').textContent = mana;
   $('periciasTotal').textContent = pericias;
 
+  $('hpBarText').textContent = `${Number($('vidaAtual').value || 0)}/${hp}`;
+  $('manaBarText').textContent = `${Number($('manaAtual').value || 0)}/${mana}`;
+  $('esforcoText').textContent = Math.max(1, Math.floor(level / 3));
+  $('orb_forca').textContent = attrVals.forca;
+  $('orb_destreza').textContent = attrVals.destreza;
+  $('orb_vigor').textContent = attrVals.vigor;
+  $('orb_intelecto').textContent = attrVals.intelecto;
+  $('orb_poder').textContent = attrVals.poder;
+
   $('custoUsado').textContent = costUsed;
   const saldo = BASE_ATTR_BUDGET - costUsed;
   $('custoSaldo').textContent = saldo;
