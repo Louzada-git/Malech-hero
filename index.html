@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ficha RPG - Sistema Hero</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="container">
+    <h1>Ficha de Personagem — Sistema Hero</h1>
+    <p>Preencha os campos. Os valores calculados são atualizados automaticamente.</p>
+  </header>
+
+  <main class="container grid">
+    <section class="card">
+      <h2>Dados básicos</h2>
+      <div class="form-grid">
+        <label>Nome
+          <input type="text" id="nome" placeholder="Nome do personagem" />
+        </label>
+        <label>Origem
+          <select id="origem">
+            <option value="nenhuma">Nenhuma</option>
+            <option value="experimento">Experimento</option>
+            <option value="favelado">Favelado</option>
+            <option value="vigilante">Vigilante</option>
+            <option value="indispertado">Indispertado</option>
+            <option value="ex_possuido">Ex-possuído</option>
+            <option value="amnesico">Amnésico</option>
+            <option value="nomade">Nômade</option>
+            <option value="vitima">Vítima</option>
+            <option value="cacado">Caçado</option>
+          </select>
+        </label>
+        <label>Nível atual
+          <input type="number" id="nivel" min="1" value="1" />
+        </label>
+        <label>EXP atual
+          <input type="number" id="expAtual" min="0" value="0" />
+        </label>
+      </div>
+      <div class="stats-line">
+        <span>EXP para próximo nível: <strong id="expProximo">100</strong></span>
+        <span>Dinheiro inicial: <strong id="dinheiro">$250</strong></span>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Atributos</h2>
+      <p class="muted">Orçamento inicial: <strong>28</strong> de custo de atributo.</p>
+      <div class="attr-grid" id="atributosGrid"></div>
+      <div class="stats-line wrap">
+        <span>Custo usado: <strong id="custoUsado">0</strong></span>
+        <span>Custo restante: <strong id="custoRestante">28</strong></span>
+        <span>Pontos de atributo ganhos por nível: <strong id="pontosAtributoNivel">0</strong></span>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Recursos e derivados</h2>
+      <div class="result-grid">
+        <article>
+          <h3>Mana</h3>
+          <p class="big" id="manaTotal">0</p>
+          <small>Nível × 5 + (Poder × Nível)</small>
+        </article>
+        <article>
+          <h3>HP</h3>
+          <p class="big" id="hpTotal">0</p>
+          <small>Nível × 5 + (Vigor × Nível)</small>
+        </article>
+        <article>
+          <h3>Perícias</h3>
+          <p class="big" id="periciasTotal">0</p>
+          <small>2 + (Inteligência ÷ 2)</small>
+        </article>
+      </div>
+      <div class="stats-line wrap">
+        <span>Pontos de Combate: <strong id="pontosCombate">15</strong></span>
+        <span>Pontos de Evolução: <strong id="pontosEvolucao">15</strong></span>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Poderes</h2>
+      <div class="form-grid">
+        <label>Descrição do poder
+          <textarea id="poderDescricao" rows="3" placeholder="Como o poder funciona no mundo..."></textarea>
+        </label>
+        <label>Defeito
+          <textarea id="poderDefeito" rows="2" placeholder="Nerf escolhido em troca de benefício..."></textarea>
+        </label>
+        <label>Categoria principal
+          <select id="categoriaPrincipal">
+            <option>Ataque</option>
+            <option>Mente</option>
+            <option>Suporte</option>
+            <option>Defesa</option>
+            <option>Geral</option>
+          </select>
+        </label>
+        <label>Secundária 1
+          <select id="categoriaSec1">
+            <option value="">Nenhuma</option>
+            <option>Ataque</option>
+            <option>Mente</option>
+            <option>Suporte</option>
+            <option>Defesa</option>
+            <option>Geral</option>
+          </select>
+        </label>
+        <label>Secundária 2
+          <select id="categoriaSec2">
+            <option value="">Nenhuma</option>
+            <option>Ataque</option>
+            <option>Mente</option>
+            <option>Suporte</option>
+            <option>Defesa</option>
+            <option>Geral</option>
+          </select>
+        </label>
+      </div>
+      <p class="muted" id="eficienciaTexto">Eficiência das categorias secundárias: —</p>
+    </section>
+
+    <section class="card full">
+      <h2>Efeitos e Aptidões escolhidas</h2>
+      <div class="split">
+        <label>Efeitos (um por linha)
+          <textarea id="efeitos" rows="10" placeholder="Ex.: Dano (rank 3, mana 10)\nCura (rank 2, mana 6)"></textarea>
+        </label>
+        <label>Aptidões / Talentos (um por linha)
+          <textarea id="aptidoes" rows="10" placeholder="Ex.: Ataque Duplo\nPasso Fantasma"></textarea>
+        </label>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <button id="exportar">Exportar JSON</button>
+    <button id="resetar" class="secondary">Resetar ficha</button>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

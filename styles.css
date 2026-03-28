@@ -1,0 +1,126 @@
+:root {
+  --bg: #0f1115;
+  --card: #1a1f29;
+  --text: #ecf1ff;
+  --muted: #99a4bf;
+  --accent: #63a1ff;
+  --danger: #ff6b6b;
+  --ok: #55d08a;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
+  background: linear-gradient(180deg, #0b0e13, #111725 35%, #0f1115);
+  color: var(--text);
+}
+
+.container {
+  width: min(1200px, 92vw);
+  margin: 0 auto;
+}
+
+header { padding: 2rem 0 1rem; }
+h1 { margin: 0 0 .3rem; }
+p { margin: 0; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(280px, 1fr));
+  gap: 1rem;
+  padding-bottom: 1rem;
+}
+
+.card {
+  background: rgba(26, 31, 41, .92);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 14px;
+  padding: 1rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,.25);
+}
+
+.card.full { grid-column: 1 / -1; }
+
+h2 { margin-top: 0; font-size: 1.05rem; }
+h3 { margin: 0; }
+.muted { color: var(--muted); margin-bottom: .8rem; }
+
+.form-grid, .attr-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(150px, 1fr));
+  gap: .75rem;
+}
+
+.attr-grid { grid-template-columns: repeat(3, minmax(140px, 1fr)); }
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+  font-size: .9rem;
+}
+
+input, select, textarea, button {
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: #0e1320;
+  color: var(--text);
+  padding: .6rem .7rem;
+  font: inherit;
+}
+
+textarea { resize: vertical; }
+
+.stats-line {
+  margin-top: .9rem;
+  display: flex;
+  justify-content: space-between;
+  gap: .75rem;
+}
+
+.stats-line.wrap { flex-wrap: wrap; }
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(120px, 1fr));
+  gap: .75rem;
+}
+
+.result-grid article {
+  background: #12192a;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px;
+  padding: .8rem;
+}
+
+.big {
+  margin: .4rem 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(200px, 1fr));
+  gap: .8rem;
+}
+
+.footer {
+  display: flex;
+  gap: .75rem;
+  padding: .4rem 0 2rem;
+}
+
+button { cursor: pointer; font-weight: 600; }
+button.secondary { background: #1a2132; }
+
+.bad { color: var(--danger); font-weight: 700; }
+.good { color: var(--ok); font-weight: 700; }
+
+@media (max-width: 900px) {
+  .grid, .split, .result-grid, .attr-grid, .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
