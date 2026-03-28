@@ -7,31 +7,69 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="container">
-    <h1>Ficha de Personagem — Sistema Hero</h1>
-    <p>Preencha os campos. Os valores calculados são atualizados automaticamente.</p>
+  <header class="container topbar">
+    <div>
+      <h1>Ficha de Personagem — Sistema Hero</h1>
+      <p>Versão completa com cálculo automático, controle de pontos, login e salvamento online.</p>
+    </div>
+    <div class="status-box">
+      <span>Usuário: <strong id="usuarioLogado">visitante</strong></span>
+      <span>Status: <strong id="statusOnline" class="badge offline">offline</strong></span>
+    </div>
   </header>
 
-  <main class="container grid">
+  <main class="container layout">
+    <section class="card" id="card-auth">
+      <h2>Login / Conta</h2>
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="local">Modo Local</button>
+        <button class="tab-btn" data-tab="api">Modo API</button>
+      </div>
+
+      <div class="tab-content active" id="tab-local">
+        <p class="muted">Ideal para testar hospedado estático (GitHub Pages/Netlify). Dados ficam no navegador.</p>
+        <div class="form-grid">
+          <label>E-mail
+            <input id="authEmail" type="email" placeholder="jogador@email.com" />
+          </label>
+          <label>Senha
+            <input id="authSenha" type="password" placeholder="********" />
+          </label>
+        </div>
+        <div class="actions">
+          <button id="btnRegistrar">Registrar</button>
+          <button id="btnLogin" class="secondary">Entrar</button>
+          <button id="btnLogout" class="danger">Sair</button>
+        </div>
+      </div>
+
+      <div class="tab-content" id="tab-api">
+        <p class="muted">Conecte com seu backend (ex.: Node, Supabase Edge, Firebase Function).</p>
+        <div class="form-grid">
+          <label>Base URL da API
+            <input id="apiBaseUrl" placeholder="https://seu-backend.com/api" />
+          </label>
+          <label>Token JWT (opcional)
+            <input id="apiToken" placeholder="Cole o token recebido no login" />
+          </label>
+        </div>
+        <div class="actions">
+          <button id="btnSalvarConfigApi">Salvar config API</button>
+          <button id="btnTestarApi" class="secondary">Testar conexão</button>
+        </div>
+        <small class="muted">Endpoints esperados: <code>/health</code>, <code>/sheets</code> (GET/POST), <code>/sheets/:id</code> (GET).</small>
+      </div>
+      <p class="feedback" id="authFeedback"></p>
+    </section>
+
     <section class="card">
-      <h2>Dados básicos</h2>
+      <h2>Dados do Personagem</h2>
       <div class="form-grid">
         <label>Nome
           <input type="text" id="nome" placeholder="Nome do personagem" />
         </label>
         <label>Origem
-          <select id="origem">
-            <option value="nenhuma">Nenhuma</option>
-            <option value="experimento">Experimento</option>
-            <option value="favelado">Favelado</option>
-            <option value="vigilante">Vigilante</option>
-            <option value="indispertado">Indispertado</option>
-            <option value="ex_possuido">Ex-possuído</option>
-            <option value="amnesico">Amnésico</option>
-            <option value="nomade">Nômade</option>
-            <option value="vitima">Vítima</option>
-            <option value="cacado">Caçado</option>
-          </select>
+          <select id="origem"></select>
         </label>
         <label>Nível atual
           <input type="number" id="nivel" min="1" value="1" />
@@ -40,107 +78,120 @@
           <input type="number" id="expAtual" min="0" value="0" />
         </label>
       </div>
-      <div class="stats-line">
-        <span>EXP para próximo nível: <strong id="expProximo">100</strong></span>
+      <div class="stats-line wrap">
+        <span>EXP p/ próximo nível: <strong id="expProximo">100</strong></span>
         <span>Dinheiro inicial: <strong id="dinheiro">$250</strong></span>
+        <span>Deslocamento base: <strong id="deslocamento">9m</strong></span>
       </div>
+      <p class="muted" id="origemObs">Sem observações de origem.</p>
     </section>
 
     <section class="card">
-      <h2>Atributos</h2>
-      <p class="muted">Orçamento inicial: <strong>28</strong> de custo de atributo.</p>
+      <h2>Atributos e custo</h2>
       <div class="attr-grid" id="atributosGrid"></div>
       <div class="stats-line wrap">
         <span>Custo usado: <strong id="custoUsado">0</strong></span>
-        <span>Custo restante: <strong id="custoRestante">28</strong></span>
-        <span>Pontos de atributo ganhos por nível: <strong id="pontosAtributoNivel">0</strong></span>
+        <span>Custo restante (28): <strong id="custoRestante">28</strong></span>
+        <span>Ganho de pontos de atributo por nível: <strong id="pontosAtributoNivel">0</strong></span>
       </div>
+      <details>
+        <summary>Tabela de custo de atributo</summary>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Atributo</th><th>Custo</th></tr></thead>
+            <tbody id="costTableBody"></tbody>
+          </table>
+        </div>
+      </details>
     </section>
 
     <section class="card">
-      <h2>Recursos e derivados</h2>
+      <h2>Recursos derivados</h2>
       <div class="result-grid">
-        <article>
-          <h3>Mana</h3>
-          <p class="big" id="manaTotal">0</p>
-          <small>Nível × 5 + (Poder × Nível)</small>
-        </article>
-        <article>
-          <h3>HP</h3>
-          <p class="big" id="hpTotal">0</p>
-          <small>Nível × 5 + (Vigor × Nível)</small>
-        </article>
-        <article>
-          <h3>Perícias</h3>
-          <p class="big" id="periciasTotal">0</p>
-          <small>2 + (Inteligência ÷ 2)</small>
-        </article>
+        <article><h3>Mana</h3><p class="big" id="manaTotal">0</p><small>Nível × 5 + (Poder × Nível)</small></article>
+        <article><h3>HP</h3><p class="big" id="hpTotal">0</p><small>Nível × 5 + (Vigor × Nível)</small></article>
+        <article><h3>Perícias</h3><p class="big" id="periciasTotal">0</p><small>2 + (Inteligência ÷ 2)</small></article>
       </div>
-      <div class="stats-line wrap">
-        <span>Pontos de Combate: <strong id="pontosCombate">15</strong></span>
-        <span>Pontos de Evolução: <strong id="pontosEvolucao">15</strong></span>
+      <div class="result-grid mini">
+        <article><h3>Combate</h3><p class="big" id="pontosCombate">15</p></article>
+        <article><h3>Evolução</h3><p class="big" id="pontosEvolucao">15</p></article>
+        <article><h3>Mod. Poder</h3><p class="big" id="modPoder">0</p></article>
       </div>
+      <small class="muted">Nos níveis 2, 5, 7, 10, 12, 15... (n % 5 = 2 ou 0), ganha pontos extras de combate/evolução.</small>
     </section>
 
     <section class="card">
-      <h2>Poderes</h2>
+      <h2>Poder principal</h2>
       <div class="form-grid">
-        <label>Descrição do poder
-          <textarea id="poderDescricao" rows="3" placeholder="Como o poder funciona no mundo..."></textarea>
+        <label>Descrição
+          <textarea id="poderDescricao" rows="3" placeholder="Como seu poder se manifesta..."></textarea>
         </label>
         <label>Defeito
-          <textarea id="poderDefeito" rows="2" placeholder="Nerf escolhido em troca de benefício..."></textarea>
+          <textarea id="poderDefeito" rows="3" placeholder="Nerf/pacto do poder..."></textarea>
         </label>
+      </div>
+      <div class="form-grid">
         <label>Categoria principal
           <select id="categoriaPrincipal">
-            <option>Ataque</option>
-            <option>Mente</option>
-            <option>Suporte</option>
-            <option>Defesa</option>
-            <option>Geral</option>
+            <option>Ataque</option><option>Mente</option><option>Suporte</option><option>Defesa</option><option>Geral</option>
           </select>
         </label>
         <label>Secundária 1
-          <select id="categoriaSec1">
-            <option value="">Nenhuma</option>
-            <option>Ataque</option>
-            <option>Mente</option>
-            <option>Suporte</option>
-            <option>Defesa</option>
-            <option>Geral</option>
-          </select>
+          <select id="categoriaSec1"><option value="">Nenhuma</option><option>Ataque</option><option>Mente</option><option>Suporte</option><option>Defesa</option><option>Geral</option></select>
         </label>
         <label>Secundária 2
-          <select id="categoriaSec2">
-            <option value="">Nenhuma</option>
-            <option>Ataque</option>
-            <option>Mente</option>
-            <option>Suporte</option>
-            <option>Defesa</option>
-            <option>Geral</option>
-          </select>
+          <select id="categoriaSec2"><option value="">Nenhuma</option><option>Ataque</option><option>Mente</option><option>Suporte</option><option>Defesa</option><option>Geral</option></select>
         </label>
       </div>
-      <p class="muted" id="eficienciaTexto">Eficiência das categorias secundárias: —</p>
+      <p class="muted" id="eficienciaTexto">Eficiência de secundárias: —</p>
     </section>
 
     <section class="card full">
-      <h2>Efeitos e Aptidões escolhidas</h2>
+      <h2>Efeitos</h2>
+      <div class="split effects-grid" id="effectsGrid"></div>
+      <p class="muted">Você pode marcar quantos efeitos quiser e ajustar rank/mana de cada um para consulta rápida.</p>
+    </section>
+
+    <section class="card full">
+      <h2>Aptidões e talentos</h2>
       <div class="split">
-        <label>Efeitos (um por linha)
-          <textarea id="efeitos" rows="10" placeholder="Ex.: Dano (rank 3, mana 10)\nCura (rank 2, mana 6)"></textarea>
-        </label>
-        <label>Aptidões / Talentos (um por linha)
-          <textarea id="aptidoes" rows="10" placeholder="Ex.: Ataque Duplo\nPasso Fantasma"></textarea>
-        </label>
+        <div>
+          <label>Buscar aptidão
+            <input id="aptidaoBusca" placeholder="ex.: ataque, defesa, crítico" />
+          </label>
+          <div id="aptidoesLista" class="checklist"></div>
+        </div>
+        <div>
+          <label>Outras anotações
+            <textarea id="aptidoes" rows="14" placeholder="Aptidões caseiras, talentos extras, observações..."></textarea>
+          </label>
+          <div class="stats-line wrap">
+            <span>Pontos de combate gastos: <strong id="pcGastos">0</strong></span>
+            <span>Saldo combate: <strong id="pcSaldo">15</strong></span>
+          </div>
+        </div>
       </div>
     </section>
-  </main>
 
-  <footer class="container footer">
-    <button id="exportar">Exportar JSON</button>
-    <button id="resetar" class="secondary">Resetar ficha</button>
-  </footer>
+    <section class="card full">
+      <h2>Salvar / Carregar online</h2>
+      <div class="actions wrap">
+        <button id="btnSalvarNuvem">Salvar ficha online</button>
+        <button id="btnCarregarNuvem" class="secondary">Carregar ficha online</button>
+        <button id="exportar" class="secondary">Exportar JSON</button>
+        <button id="resetar" class="danger">Resetar ficha</button>
+      </div>
+      <div class="form-grid">
+        <label>ID da ficha (para editar/carregar)
+          <input id="sheetId" placeholder="Ex.: ficha-meu-heroi-01" />
+        </label>
+        <label>Nome da campanha
+          <input id="campanha" placeholder="Campanha Jujutsu" />
+        </label>
+      </div>
+      <p class="feedback" id="saveFeedback"></p>
+    </section>
+  </main>
 
   <script src="script.js"></script>
 </body>
